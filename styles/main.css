@@ -1,0 +1,43 @@
+html, body, body > .container-fluid, body > .container-fluid > .row:first-child {
+    height: 100%;
+}
+
+#components {
+    background: #eeeeee;
+    padding: 0 !important;
+    -webkit-user-select : none;
+}
+
+    #components.fixed {
+        position: fixed;
+        height: 100%;
+    }
+
+    #components.left, #components.right {
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    #components .components-header {
+        background: #29b8cc;
+        display: inline-block;
+        width: 100%;
+        cursor: move;
+    }
+
+        #components .components-header .components-minimize, #components .components-header .components-pin {
+            display: inline-block;
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            float: right;
+            cursor: pointer;
+            line-height: 30px;
+        }
+
+            #components .components-header .components-minimize:hover, #components .components-header .components-pin:hover {
+                background: #bbbbbb;
+            }
+
+.container-fluid .row > div {
+}
