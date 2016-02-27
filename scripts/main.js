@@ -19,10 +19,11 @@ $(function () {
         };
 
         ComponentsInteractions.prototype.AddEvents = function () {
+            this.AddComponentsLayoutEvents();
             this.AddComponentsEvents();
         };
 
-        ComponentsInteractions.prototype.AddComponentsEvents = function () {
+        ComponentsInteractions.prototype.AddComponentsLayoutEvents = function () {
             dragula([document.querySelector('.container-fluid > .row')], {
                 moves: function (el, source, handle, sibling) {
                     return el.id != 'page-layout' && handle.className == 'components-header';
@@ -98,9 +99,9 @@ $(function () {
 
                 if (direction != false && direction != el.data('direction')) {
                     if (direction == Directions.Left) {
-                        replaceComeponets(Directions.Left, 'col-xs-3', 'col-xs-9');
+                        replaceComeponets(Directions.Left, 'col-xs-3', 'row col-xs-9');
                     } else if (direction == Directions.Right) {
-                        replaceComeponets(Directions.Right, 'col-xs-3 col-xs-push-9', 'col-xs-9 col-xs-pull-3');
+                        replaceComeponets(Directions.Right, 'col-xs-3 col-xs-push-9', 'row col-xs-9 col-xs-pull-3');
                     }
                 }
 
@@ -115,6 +116,25 @@ $(function () {
 
                 shadow.remove();
             }
+        };
+
+        ComponentsInteractions.prototype.AddComponentsEvents = function () {
+            dragula([document.querySelector('#components .components-body')], {
+                isContainer: function (el) {
+                    return el.classList.contains('aside');
+                },
+                moves: function (el, source, handle, sibling) {
+                    return true;
+                },
+                accepts: function (el, target, source, sibling) {
+                    return !target.classList.contains("components-body");
+                },
+                copy: function (el, source) {
+                    return source.classList.contains("components-body");
+                }
+            }).on('drag', function (el) {
+                console.log(el);
+            });
         };
 
         return ComponentsInteractions;

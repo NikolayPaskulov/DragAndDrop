@@ -1,0 +1,11 @@
+#page-layout {
+    height: 100%;
+}
+
+    #page-layout > .aside, #page-layout > .main {
+        min-height: 100%;
+        border: 1px solid #777777;
+        -webkit-box-shadow: inset 0px 0px 12px 2px rgba(129,162,247,1);
+        -moz-box-shadow: inset 0px 0px 12px 2px rgba(129,162,247,1);
+        box-shadow: inset 0px 0px 12px 2px rgba(129,162,247,1);
+    }
