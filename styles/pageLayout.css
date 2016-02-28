@@ -2,9 +2,14 @@
     height: 100%;
 }
 
-    #page-layout > .aside, #page-layout > .main {
+    #page-layout > .aside, #page-layout > .main-section {
         min-height: 100%;
         border: 1px solid #777777;
+        border-radius:15px;
+        border-collapse:collapse;
+    }
+
+    #page-layout > .active-drop-zone {
         -webkit-box-shadow: inset 0px 0px 12px 2px rgba(129,162,247,1);
         -moz-box-shadow: inset 0px 0px 12px 2px rgba(129,162,247,1);
         box-shadow: inset 0px 0px 12px 2px rgba(129,162,247,1);

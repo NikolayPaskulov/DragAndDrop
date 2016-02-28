@@ -121,20 +121,47 @@ $(function () {
         ComponentsInteractions.prototype.AddComponentsEvents = function () {
             dragula([document.querySelector('#components .components-body')], {
                 isContainer: function (el) {
-                    return el.classList.contains('aside');
+                    var containers = ['aside', 'main-section'];
+
+                    for (var i = 0; i < containers.length; i++)
+                        if (el.classList.contains(containers[i]))
+                            return true;
+
+                    return false;
                 },
                 moves: function (el, source, handle, sibling) {
                     return true;
                 },
                 accepts: function (el, target, source, sibling) {
-                    return !target.classList.contains("components-body");
+                    var containers = getContainers(el);
+                    var containsContainer = false;
+
+                    for (var i = 0; i < containers.length; i++)
+                        if (target.classList.contains(containers[i]))
+                            containsContainer = true;
+
+                    return !target.classList.contains("components-body") && containsContainer;
                 },
                 copy: function (el, source) {
                     return source.classList.contains("components-body");
                 }
-            }).on('drag', function (el) {
-                console.log(el);
+            }).on('drag', function (el, source) {
+                var containers = getContainers(el).map(function (item) { return "." + item }).join(', ');
+
+                $(el).addClass('moving');
+                $(containers).addClass('active-drop-zone');
+            }).on('dragend', function (el) {
+                var containers = getContainers(el).map(function (item) { return "." + item }).join(', ');
+
+                $(el).removeClass('moving');
+                $(containers).removeClass('active-drop-zone');
+            }).on('drop', function (el, target, source, sibling) {
+                $(source).find('.component').removeClass('moving');
             });
+
+            function getContainers(el) {
+                return ($(el).data('containers') || '').split(';').filter(Boolean);
+            }
         };
 
         return ComponentsInteractions;

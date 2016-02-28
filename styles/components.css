@@ -37,6 +37,12 @@
     user-select: none;
 }
 
+.component.moving {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
 .components-drop-shadow {
     position: fixed;
     border: 2px solid red;
